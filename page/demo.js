@@ -16,7 +16,10 @@ Page({
       })
       .on('DecodeComplete', (res) => {
         if (res.code == 0) {
-          console.log(res.data)
+          wx.showModal({
+            title: '',
+            content: JSON.stringify(res.data),
+          })
         } else {
           console.log('解析失败：' + res.reason)
         }
