@@ -107,13 +107,13 @@ export default class CardScanner {
     let target = {}
     if (this.img.radio > this.canvasSize.radio) {
       target['width'] = this.canvasSize.width
-      target['height'] = target['width'] / this.img.radio
-      target['top'] = (this.canvasSize.height - target['height']) / 2
+      target['height'] = parseInt(target['width'] / this.img.radio)
+      target['top'] = parseInt((this.canvasSize.height - target['height']) / 2)
       target['left'] = 0
     } else {
       target['height'] = this.canvasSize.height
-      target['width'] = target['height'] * this.img.radio
-      target['left'] = (this.canvasSize.width - target['width']) / 2
+      target['width'] = parseInt(target['height'] * this.img.radio)
+      target['left'] = parseInt((this.canvasSize.width - target['width']) / 2)
       target['top'] = 0
     }
     this.target = target
