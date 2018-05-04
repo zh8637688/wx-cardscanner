@@ -158,6 +158,11 @@ export default class CardScanner {
         width: that.target.width,
         height: that.target.height,
         success(res) {
+          let platform = wx.getSystemInfoSync().platform
+          if (platform == 'ios') {
+            // 兼容处理：ios获取的图片上下颠倒
+            res = that.reverseImgData(res)
+          }
           resolve({
             buffer: res.data.buffer,
             width: res.width,
@@ -172,6 +177,20 @@ export default class CardScanner {
         }
       })
     })
+  }
+
+  reverseImgData(res) {
+    var w = res.width
+    var h = res.height
+    let con = 0
+    for (var i = 0; i < h / 2; i++) {
+      for (var j = 0; j < w * 4; j++) {
+        con = res.data[i * w * 4 + j]
+        res.data[i * w * 4 + j] = res.data[(h - i - 1) * w * 4 + j]
+        res.data[(h - i - 1) * w * 4 + j] = con
+      }
+    }
+    return res
   }
 
   _toPNGBase64(buffer, width, height) {
