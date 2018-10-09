@@ -34,7 +34,7 @@ let _sortObject = (obj) => {
 ```
 
 ### 图片转Base64
-接口要求将图片进行base64编码后上传，最简单的方法就是读取图片文件原始数据，然后进行base64编码，但是微信小程序没有提供文件操作接口，只能寻求其他方法。   
+接口要求将图片进行base64编码后上传，最简单的方法就是读取图片文件原始数据，然后进行base64编码，~但是微信小程序没有提供文件操作接口，只能寻求其他方法~（更新，小程序Api中已提供文件读取的接口，通过``FileSystemManager.readFile({filePath: filePath, encoding: 'base64'})``即可获取）。   
 在基础库1.9.0中，微信提供了一个接口`wx.canvasGetImageData`可以获取canvas上指定区域的图像数据，所以可以将图片绘制到canvas上，再通过canvas获取图像数据，那么在小程序中将图片进行base64编码的流程如下：
 1. 绘制图片至canvas
 2. 获取canvas上图像数据
